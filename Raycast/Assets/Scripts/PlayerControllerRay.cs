@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerControllerRay : MonoBehaviour {
 
     public float movementSpeed = 2f;
     public float rotationSpeed = 60f;
@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour {
 
         Rotate();
 
-        AnalyseTarget();
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            AnalyseTarget();
+        }
     }
 
     private Vector3 GetInputs() {
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        Debug.DrawRay(transform.position, transform.forward * shootDistance, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * shootDistance, Color.red, 0.5f);
 
         if (Physics.Raycast(ray, out hit, shootDistance)) {
             target = hit.transform;
